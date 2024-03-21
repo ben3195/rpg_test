@@ -34,7 +34,22 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(100, attaquant.get_point_de_vie())
         self.assertEqual(0, attaque.get_point_de_vie())
 
+    def test_point_de_vie_non_negatif(self):
+        attaquant = Personnage()
+        attaque = Personnage()
+        attaquant.attaque(attaque, 98)
+        attaquant.attaque(attaque, 5)
+        self.assertEqual(100, attaquant.get_point_de_vie())
+        self.assertEqual(0, attaque.get_point_de_vie())
 
+    def test_defense(self):
+        attaquant = Personnage()
+        attaque = Personnage()
+        attaque.defend()
+        before_attack = attaque.get_point_de_vie()
+        attaquant.attaque(attaque, 98)
+        after_attack = attaque.get_point_de_vie()
+        self.assertEqual(before_attack, after_attack)
 
 if __name__ == '__main__':
     unittest.main()
