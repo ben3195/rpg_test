@@ -15,6 +15,10 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(0, personnage._points_de_vie)
         self.assertTrue(True, personnage.est_mort())
 
+    def test_initialement_vivant(self):
+        personnage = Personnage()
+        self.assertFalse(personnage.est_mort())
+
 
 if __name__ == '__main__':
     unittest.main()
