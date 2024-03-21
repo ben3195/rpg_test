@@ -7,7 +7,13 @@ class MyTestCase(unittest.TestCase):
 
     def test_initial_hp(self):
         personnage = Personnage()
-        self.assertEqual(100, personnage.health_point)  # add assertion here
+        self.assertEqual(100, personnage._points_de_vie)  # add assertion here
+
+    def test_est_mort(self):
+        personnage = Personnage()
+        personnage.tuer()
+        self.assertEqual(0, personnage._points_de_vie)
+        self.assertTrue(True, personnage.est_mort())
 
 
 if __name__ == '__main__':
