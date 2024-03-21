@@ -26,6 +26,15 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(100, attaquant.get_point_de_vie())
         self.assertLess(attaque.get_point_de_vie(), 100)
 
+    def test_attaque_mortelle(self):
+        attaquant = Personnage()
+        attaque = Personnage()
+        attaquant.attaque(attaque, 98)
+        attaquant.attaque(attaque, 2)
+        self.assertEqual(100, attaquant.get_point_de_vie())
+        self.assertEqual(0, attaque.get_point_de_vie())
+
+
 
 if __name__ == '__main__':
     unittest.main()
