@@ -51,5 +51,13 @@ class MyTestCase(unittest.TestCase):
         after_attack = attaque.get_point_de_vie()
         self.assertEqual(before_attack, after_attack)
 
+    def test_defense_disabled(self):
+        attaquant = Personnage()
+        attaque = Personnage()
+        attaque.defend()
+        attaquant.attaque(attaque, 1)
+        attaquant.attaque(attaque, 10)
+        self.assertEqual(90, attaque.get_point_de_vie())
+
 if __name__ == '__main__':
     unittest.main()

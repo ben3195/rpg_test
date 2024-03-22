@@ -31,6 +31,7 @@ class Personnage:
     def attaque(self, other: 'Personnage', puissance: int):
         if not other.get_defense():
             other.subit_attaque(puissance)
+        other.not_defending()
 
     def tuer(self):
         self._points_de_vie = 0
