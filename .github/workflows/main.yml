@@ -53,7 +53,7 @@ jobs:
             git push --force origin "failures/${{ env.CURRENT_DATE }}"
             git checkout dev
             git reset --hard HEAD~
-            git push --force origin dev
+            git push origin dev
           else
             echo "Merging to master branch..."
             git merge --no-ff ${{ env.BRANCH_NAME }}
