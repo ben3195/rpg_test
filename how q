@@ -1,0 +1,28 @@
+[33mcommit ca51756e0683ebf6549f3735f054171cea5482ba[m
+Author: ben3195 <125014103+ben3195@users.noreply.github.com>
+Date:   Fri Mar 22 16:22:29 2024 +0100
+
+    fgfh
+
+[1mdiff --git a/.github/workflows/main.yml b/.github/workflows/main.yml[m
+[1mindex 17bc81c..2d69050 100644[m
+[1m--- a/.github/workflows/main.yml[m
+[1m+++ b/.github/workflows/main.yml[m
+[36m@@ -39,6 +39,8 @@[m [mjobs:[m
+         id: get_current_date[m
+         run: |[m
+           echo "CURRENT_DATE=$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV[m
+[32m+[m[32m      - name: Get last commit SHA[m
+[32m+[m[32m        run: echo "LAST_COMMIT=$(git rev-parse HEAD~1)" >> $GITHUB_ENV[m
+       - name: Fusion sur le master ou création d'une branche d'erreur[m
+         run: |[m
+           echo  "This is the branch name: " ${{ env.BRANCH_NAME }}[m
+[36m@@ -52,7 +54,7 @@[m [mjobs:[m
+             git checkout -b "failures/${{ env.CURRENT_DATE }}" ${{ env.PREV_COMMIT }}[m
+             git push --force origin "failures/${{ env.CURRENT_DATE }}"[m
+             git checkout dev[m
+[31m-            git reset dev [HEAD~1] [m
+[32m+[m[32m            git reset ${{env.LAST_COMMIT}}[m
+             git push --force origin dev[m
+           else[m
+             echo "Merging to master branch..."[m

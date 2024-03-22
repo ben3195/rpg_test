@@ -54,6 +54,7 @@ jobs:
             git checkout -b "failures/${{ env.CURRENT_DATE }}" ${{ env.PREV_COMMIT }}
             git push --force origin "failures/${{ env.CURRENT_DATE }}"
             git checkout dev
+            echo $HEAD
             git reset ${{env.LAST_COMMIT}}
             git push --force origin dev
           else
