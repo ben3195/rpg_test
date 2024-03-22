@@ -58,6 +58,14 @@ class MyTestCase(unittest.TestCase):
         attaquant.attaque(attaque, 1)
         attaquant.attaque(attaque, 10)
         self.assertEqual(90, attaque.get_point_de_vie())
+        
+    def test_failure(self):
+        attaquant = Personnage()
+        attaque = Personnage()
+        attaque.defend()
+        attaquant.attaque(attaque, 1)
+        attaquant.attaque(attaque, 10)
+        self.assertEqual(80, attaque.get_point_de_vie())
 
 
 if __name__ == '__main__':
