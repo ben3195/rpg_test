@@ -51,10 +51,10 @@ jobs:
             echo "Merging to master branch..."
             git pull
             git merge --no-ff ${{ env.BRANCH_NAME }}
-            git push origin master
+            git push -u origin master
           else
             echo "Tests failed, creating failure branch..."
             git branch 
             git checkout -b "failures/${{ env.CURRENT_DATE }}" ${{ env.PREV_COMMIT }}
-            git push origin "failures/${{ env.CURRENT_DATE }}"
+            git push -u origin "failures/${{ env.CURRENT_DATE }}"
           fi
