@@ -1,6 +1,6 @@
 import unittest
 
-from personnage import Personnage
+from src.personnage import Personnage
 
 
 class MyTestCase(unittest.TestCase):
@@ -58,6 +58,7 @@ class MyTestCase(unittest.TestCase):
         attaquant.attaque(attaque, 1)
         attaquant.attaque(attaque, 10)
         self.assertEqual(90, attaque.get_point_de_vie())
+
 
 if __name__ == '__main__':
     unittest.main()
