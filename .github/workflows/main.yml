@@ -34,7 +34,7 @@ jobs:
       - name: Récupération du commit précédent
         id: get_prev_commit
         run: |
-          echo "PREV_COMMIT=$(git rev-parse ${GITHUB_SHA}~1)" >> $GITHUB_ENV
+          echo "PREV_COMMIT=$(git rev-parse ${GITHUB_SHA})" >> $GITHUB_ENV
       - name: Récupération de la date actuelle
         id: get_current_date
         run: |
