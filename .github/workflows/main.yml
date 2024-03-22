@@ -39,6 +39,8 @@ jobs:
         id: get_current_date
         run: |
           echo "CURRENT_DATE=$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV
+      - name: Get last commit SHA
+        run: echo "LAST_COMMIT=$(git rev-parse HEAD~1)" >> $GITHUB_ENV
       - name: Fusion sur le master ou création d'une branche d'erreur
         run: |
           echo  "This is the branch name: " ${{ env.BRANCH_NAME }}
@@ -52,7 +54,7 @@ jobs:
             git checkout -b "failures/${{ env.CURRENT_DATE }}" ${{ env.PREV_COMMIT }}
             git push --force origin "failures/${{ env.CURRENT_DATE }}"
             git checkout dev
-            git reset dev [HEAD~1] 
+            git reset ${{env.LAST_COMMIT}}
             git push --force origin dev
           else
             echo "Merging to master branch..."
