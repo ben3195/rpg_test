@@ -52,8 +52,8 @@ jobs:
             git checkout -b "failures/${{ env.CURRENT_DATE }}" $GITHUB_SHA
             git push --force origin "failures/${{ env.CURRENT_DATE }}"
             git checkout dev
-            echo "Github sha = ${GITHUB_SHA}^"
-            git reset "${GITHUB_SHA}^"
+            git reset dev "${GITHUB_SHA}^"
+            git show
             git push --force origin dev
           else
             echo "Merging to master branch..."
