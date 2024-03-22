@@ -52,7 +52,7 @@ jobs:
             git checkout -b "failures/${{ env.CURRENT_DATE }}" ${{ env.PREV_COMMIT }}
             git push --force origin "failures/${{ env.CURRENT_DATE }}"
             git checkout dev
-            git reset --hard HEAD^ 
+            git reset HEAD^ 
             git push --force origin dev
           else
             echo "Merging to master branch..."
