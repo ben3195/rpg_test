@@ -5,20 +5,24 @@ from src.personnage import Personnage
 
 class MyTestCase(unittest.TestCase):
 
+    @unittest.TestCase
     def test_initial_hp(self):
         personnage = Personnage()
         self.assertEqual(100, personnage.get_point_de_vie())  # add assertion here
 
+    @unittest.TestCase
     def test_est_mort(self):
         personnage = Personnage()
         personnage.tuer()
         self.assertEqual(0, personnage.get_point_de_vie())
         self.assertTrue(True, personnage.est_mort())
 
+    @unittest.TestCase
     def test_initialement_vivant(self):
         personnage = Personnage()
         self.assertFalse(personnage.est_mort())
 
+    @unittest.TestCase
     def test_attaque(self):
         attaquant = Personnage()
         attaque = Personnage()
@@ -26,6 +30,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(100, attaquant.get_point_de_vie())
         self.assertLess(attaque.get_point_de_vie(), 100)
 
+    @unittest.TestCase
     def test_attaque_mortelle(self):
         attaquant = Personnage()
         attaque = Personnage()
@@ -34,6 +39,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(100, attaquant.get_point_de_vie())
         self.assertEqual(0, attaque.get_point_de_vie())
 
+    @unittest.TestCase
     def test_point_de_vie_non_negatif(self):
         attaquant = Personnage()
         attaque = Personnage()
@@ -42,6 +48,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(100, attaquant.get_point_de_vie())
         self.assertEqual(0, attaque.get_point_de_vie())
 
+    @unittest.TestCase
     def test_defense(self):
         attaquant = Personnage()
         attaque = Personnage()
@@ -51,6 +58,7 @@ class MyTestCase(unittest.TestCase):
         after_attack = attaque.get_point_de_vie()
         self.assertEqual(before_attack, after_attack)
 
+    @unittest.TestCase
     def test_defense_disabled(self):
         attaquant = Personnage()
         attaque = Personnage()
