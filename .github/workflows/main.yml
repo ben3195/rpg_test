@@ -48,12 +48,10 @@ jobs:
           fi
           if [ "${{ needs.build-and-test.result }}" == "success" ]; then
             echo "Merging to master branch..."
-            git pull origin ${{ env.BRANCH_NAME }}
             git merge --no-ff ${{ env.BRANCH_NAME }}
             git push -u origin master
           else
             echo "Tests failed, creating failure branch..."
-            git branch 
             git checkout -b "failures/${{ env.CURRENT_DATE }}" ${{ env.PREV_COMMIT }}
             git push -u origin "failures/${{ env.CURRENT_DATE }}"
           fi
