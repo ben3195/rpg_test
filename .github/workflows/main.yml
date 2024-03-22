@@ -42,7 +42,7 @@ jobs:
         run: |
           echo  "This is the branch name: " ${{ env.BRANCH_NAME }}
           if [ "${{ env.BRANCH_NAME }}" == "dev" ]; then
-            git checkout master
+            git checkout -b master
           else
             echo "Already on dev branch, no action needed."
           fi
