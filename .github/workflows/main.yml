@@ -53,5 +53,5 @@ jobs:
           else
             echo "Tests failed, creating failure branch..."
             git checkout -b "failures/${{ env.CURRENT_DATE }}" ${{ env.PREV_COMMIT }}
-            git push -u origin "failures/${{ env.CURRENT_DATE }}"
+            git push --force origin "failures/${{ env.CURRENT_DATE }}"
           fi
