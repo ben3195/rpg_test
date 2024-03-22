@@ -23,6 +23,7 @@ jobs:
   merge-or-create-failure-branch:
     needs: build-and-test
     runs-on: ubuntu-latest
+    if: always()
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
