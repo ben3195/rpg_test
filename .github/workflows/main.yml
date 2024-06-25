@@ -15,7 +15,7 @@ jobs:
       - name: Configuration de l'environnement python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.11.5
+          python-version: 3.x
 
       - name: Exécution des tests
         run: |
@@ -28,6 +28,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Récupère toutes les branches et tout l'historique
 
       - name: Set up Git
         run: |
@@ -45,10 +47,11 @@ jobs:
         run: |
           if [ "${{ needs.build-and-test.result }}" == "success" ]; then
             echo "Tests passed, merging to master..."
-            git checkout -b master
+            git fetch origin
+            git checkout master
+            git pull origin master  # Intègre les modifications de la branche master distante
             git merge dev
             git push origin master
-            git checkout dev
           else
             echo "Tests failed, creating failure branch..."
             git checkout dev
@@ -57,6 +60,7 @@ jobs:
             echo "Reverting dev to last successful commit..."
             LAST_GOOD_COMMIT=$(git rev-list --all --grep 'CI: Successful build' -n 1)
             git reset --hard $LAST_GOOD_COMMIT
+            git push --force origin dev
           fi
 
   mark-success:
@@ -66,6 +70,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Récupère toutes les branches et tout l'historique
 
       - name: Mark commit as successful
         run: |
