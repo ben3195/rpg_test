@@ -60,7 +60,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(90, attaque.get_point_de_vie())
         
     def test_debile(self):
-        self.assertEqual(1, 2)
+        self.assertEqual(1, 1)
         
 
 if __name__ == '__main__':

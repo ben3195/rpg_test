@@ -60,6 +60,7 @@ jobs:
             echo "Reverting dev to last successful commit..."
             git checkout dev
             git reset --hard HEAD~1
+            git push --force origin dev
           fi
 
 
