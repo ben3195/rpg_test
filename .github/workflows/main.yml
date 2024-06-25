@@ -54,26 +54,11 @@ jobs:
             git push origin master
           else
             echo "Tests failed, creating failure branch..."
-            git checkout dev
             git checkout -b "failures/${{ env.CURRENT_DATE }}"
             git push origin "failures/${{ env.CURRENT_DATE }}"
             echo "Reverting dev to last successful commit..."
+            git checkout dev
             LAST_GOOD_COMMIT=$(git rev-list --all --grep 'CI: Successful build' -n 1)
             git reset --hard $LAST_GOOD_COMMIT
             git push --force origin dev
           fi
-
-  mark-success:
-    needs: [build-and-test, merge-or-create-failure-branch]
-    if: success()
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0  # Récupère toutes les branches et tout l'historique
-
-      - name: Mark commit as successful
-        run: |
-          echo "CI: Successful build" | git commit --allow-empty -F -
-          git push origin dev
