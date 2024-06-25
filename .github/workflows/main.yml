@@ -54,6 +54,7 @@ jobs:
             git push origin master
           else
             echo "Tests failed, creating failure branch..."
+            git checkout dev
             git checkout -b "failures/${{ env.CURRENT_DATE }}"
             git push origin "failures/${{ env.CURRENT_DATE }}"
             echo "Reverting dev to last successful commit..."
