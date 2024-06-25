@@ -59,8 +59,7 @@ jobs:
             git push origin "failures/${{ env.CURRENT_DATE }}"
             echo "Reverting dev to last successful commit..."
             git checkout dev
-            git reset --hard origin/dev
-            git push --force origin dev
+            git reset --hard HEAD~1
           fi
 
 
