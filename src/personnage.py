@@ -36,7 +36,6 @@ class Personnage:
     def tuer(self):
         self._points_de_vie = 0
         self._mort = True
-        
+
     def check_est_en_vie(self):
         print(self._mort)
-
