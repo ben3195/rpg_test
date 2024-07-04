@@ -1,7 +1,7 @@
 name: Gestion des pushs
 run-name: ${{ github.actor }} is testing out GitHub Actions
 
-on: 
+on:
   push:
     branches: [dev]
 
@@ -31,13 +31,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Git
+      - name: Git configuration
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Récupération de la date actuelle
-        id: get_current_date
+      - name: Get current date
+        id: get_date
         run: |
           echo "CURRENT_DATE=$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV
 
@@ -46,22 +46,19 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if [ "${{ needs.build-and-test.result }}" == "success" ]; then
-            echo "Tests passed, merging to master..."
+            echo "Tests passed --> merging to master"
             git fetch origin
             git checkout master
             git pull origin master
             git merge dev
             git push origin master
           else
-            echo "Tests failed, creating failure branch..."
+            echo "Tests failed --> creating new failure branch"
             git checkout dev
             git checkout -b "failures/${{ env.CURRENT_DATE }}"
             git push origin "failures/${{ env.CURRENT_DATE }}"
-            echo "Reverting dev to last successful commit..."
+            echo "Reverting dev to last successful commit"
             git checkout dev
             git reset --hard HEAD~1
             git push --force origin dev
           fi
-
-
-        
