@@ -12,7 +12,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Configuration of the python env
+      - name: Configuration of python env
         uses: actions/setup-python@v4
         with:
           python-version: 3.x
